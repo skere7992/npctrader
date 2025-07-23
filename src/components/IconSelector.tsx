@@ -76,7 +76,7 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
   return (
     <div className={`relative ${className}`}>
       {label && (
-        <label className="block text-xs text-brand-grey mb-1">{label}</label>
+        <label className="block text-sm font-medium text-brand-cream mb-2">{label}</label>
       )}
       
       <button
