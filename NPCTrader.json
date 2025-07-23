@@ -1,0 +1,1480 @@
+{
+  "NPC Display Name": "NPCTrader",
+  "NPC Appearance": {
+    "Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)": "",
+    "Custom Items with Skins (overrides preset if specified)": {
+      "hoodie": 2080975449,
+      "pants": 2080977144,
+      "metal.facemask": 2105454370,
+      "rifle.ak": 2128372674,
+      "shoes.boots": 2090776132,
+      "roadsign.kilt": 2120628865,
+      "roadsign.jacket": 2120615642
+    }
+  },
+  "Default Cooldown (seconds)": 3600,
+  "VIP Cooldown (seconds)": 1800,
+  "Language Settings": {
+    "Default Language": "en",
+    "Allow Per-Player Language": true
+  },
+  "NCP Integration": {
+    "Enable NCP Integration": true,
+    "Use Chat Fallback if NCP Unavailable": true,
+    "Notification Types": {
+      "Trade Success Notifications": true,
+      "Trade Error Notifications": true,
+      "Cooldown Notifications": true,
+      "Permission Error Notifications": true,
+      "Configuration Change Notifications": true,
+      "NPC Management Notifications": true,
+      "Conversation Notifications": false,
+      "General Info Notifications": true
+    }
+  },
+  "UI Settings": {
+    "Main Background Color": "#1E202095",
+    "Header Background Color": "#1E202080",
+    "Header Background Overlay Color": "#00000020",
+    "Header Title Text Color": "#E4DAD1",
+    "Close Button Color": "#CD412B",
+    "Close Button Text Color": "#FFFFFF",
+    "Cooldown Info Text Color": "#B0B0B0",
+    "Content Area Background Color": "#1E202080",
+    "Panel Background Color": "#2A2D2D",
+    "Panel Border Color": "#738D45",
+    "Panel Insufficient Items Overlay Color": "#2A2D2D",
+    "Panel Insufficient Items Border Color": "#CD412B60",
+    "Trade Offer Header Section Color": "#2A2D2D40",
+    "Trade Offer Title Text Color": "#E4DAD1",
+    "Trade Offer Title Locked Text Color": "#8A7A7A",
+    "Trade Offer Title Insufficient Text Color": "#E4DAD1",
+    "Main Icon Container Background Color": "#00000000",
+    "Main Icon Color": "#E4DAD1",
+    "Main Icon Disabled Color": "#A4A6A780",
+    "Required Items Header Color": "#B85A5A",
+    "Rewards Header Color": "#6B8B4B",
+    "Item Container Color": "#333636",
+    "Item Icon Color": "#E4DAD1",
+    "Item Icon Disabled Color": "#A4A6A780",
+    "Quantity Badge Color": "#738D45",
+    "Quantity Badge Text Color": "#FFFFFF",
+    "More Items Indicator Color": "#C26D33",
+    "Reward Icon Color": "#E4DAD1",
+    "Reward Icon Disabled Color": "#A4A6A780",
+    "Reward Special Icon Color": "#C26D33",
+    "Button Color": "#738D4550",
+    "Button Disabled Color": "#CD412B80",
+    "Button Success Icon Color": "#738D45",
+    "Button Success Text Color": "#738D45",
+    "Button Disabled Icon Color": "#8A7A7A",
+    "Button Disabled Text Color": "#8A7A7A",
+    "Button Insufficient Icon Color": "#C26D33",
+    "Button Insufficient Text Color": "#C26D33",
+    "Cooldown Panel Color": "#2C1E1E90",
+    "Cooldown Border Color": "#CD412B",
+    "Cooldown Text Color": "#8A7A7A",
+    "Cooldown Status Color": "#8B4A42",
+    "Available Status Color": "#738D45",
+    "VIP Badge Color": "#C26D33",
+    "Scrollbar Track Color": "#1E202000",
+    "Scrollbar Handle Color": "#738D45",
+    "No Offers Text Color": "#A4A6A7",
+    "Confirmation Dialog Background Color": "#1E2020",
+    "Confirmation Dialog Border Color": "#CD412B10",
+    "Confirmation Dialog Header Background Color": "#3D1A1A",
+    "Confirmation Dialog Header Overlay Color": "#CD412B20",
+    "Confirmation Dialog Header Text Color": "#E4DAD1",
+    "Confirmation Dialog Content Background Color": "#1E202080",
+    "Confirmation Dialog Message Text Color": "#E4DAD1",
+    "Confirmation Dialog Warning Icon Color": "#E4DAD1",
+    "Confirmation Dialog Confirm Button Color": "#738D4550",
+    "Confirmation Dialog Confirm Button Text Color": "#738D45",
+    "Confirmation Dialog Confirm Button Icon Color": "#738D45",
+    "Confirmation Dialog Cancel Button Color": "#CD412B50",
+    "Confirmation Dialog Cancel Button Text Color": "#E4DAD1",
+    "Confirmation Dialog Cancel Button Icon Color": "#E4DAD1",
+    "Confirmation Dialog Overlay Color": "#1E2020"
+  },
+  "Trade Offers": [
+    {
+      "Display Name": "Explosive Manufacturing",
+      "Required Items": [
+        {
+          "Item Shortname": "sulfur",
+          "Amount": 800,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "charcoal",
+          "Amount": 300,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 100,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 5,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "gunpowder",
+          "Amount": 400,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "explosives",
+          "Amount": 20,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "grenade.f1",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "grenade.beancan",
+          "Amount": 12,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "explosive.satchel",
+          "Amount": 3,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "explosion",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Survival Kit Assembly",
+      "Required Items": [
+        {
+          "Item Shortname": "cloth",
+          "Amount": 300,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "leather",
+          "Amount": 150,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 10,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "fat.animal",
+          "Amount": 50,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "bone.fragments",
+          "Amount": 100,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "wood",
+          "Amount": 500,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "stones",
+          "Amount": 200,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "burlap.headwrap",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "burlap.shirt",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "burlap.trousers",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "burlap.shoes",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "sleeping.bag",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "torch",
+          "Amount": 5,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "backpack",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Medical Supply Station",
+      "Required Items": [
+        {
+          "Item Shortname": "cloth",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "fat.animal",
+          "Amount": 80,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "bone.fragments",
+          "Amount": 60,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 100,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "lowgradefuel",
+          "Amount": 30,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "scrap",
+          "Amount": 50,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "bandage",
+          "Amount": 20,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "syringe.medical",
+          "Amount": 5,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "largemedkit",
+          "Amount": 3,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "antiradpills",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "maxhealthtea",
+          "Amount": 3,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "medical",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Ammunition Factory",
+      "Required Items": [
+        {
+          "Item Shortname": "gunpowder",
+          "Amount": 300,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 400,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "sulfur",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "charcoal",
+          "Amount": 150,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 100,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "bone.fragments",
+          "Amount": 80,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "ammo.rifle",
+          "Amount": 120,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "ammo.pistol",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "ammo.shotgun",
+          "Amount": 80,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "arrow.wooden",
+          "Amount": 150,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "arrow.bone",
+          "Amount": 100,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "ammo.rifle.hv",
+          "Amount": 60,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "ammunition",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Elite Construction Package",
+      "Required Items": [
+        {
+          "Item Shortname": "stones",
+          "Amount": 2000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "wood",
+          "Amount": 3000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 800,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 20,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "scrap",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 150,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "wall.external.high.stone",
+          "Amount": 5,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "door.hinged.toptier",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "lock.code",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "building.planner",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "tool.cupboard",
+          "Amount": 2,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "construction",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Advanced Tool Workshop",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 600,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 500,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalspring",
+          "Amount": 3,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 3,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "chainsaw",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "jackhammer",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "axe.salvaged",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "hammer.salvaged",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "lowgradefuel",
+          "Amount": 100,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "tools",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Food Production Center",
+      "Required Items": [
+        {
+          "Item Shortname": "corn",
+          "Amount": 50,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "pumpkin",
+          "Amount": 40,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "potato",
+          "Amount": 60,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "fertilizer",
+          "Amount": 20,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "water",
+          "Amount": 1000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "wood",
+          "Amount": 300,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "seed.corn",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "seed.pumpkin",
+          "Amount": 12,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "seed.potato",
+          "Amount": 18,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "clone.corn",
+          "Amount": 5,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "clone.pumpkin",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "planter.large",
+          "Amount": 2,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "cooking",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Electrical Engineering Kit",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 800,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 600,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 5,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "lowgradefuel",
+          "Amount": 50,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "electric.solarpanel.large",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "electric.battery.rechargable.large",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "electrical.branch",
+          "Amount": 6,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "electric.switch",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "electrical.combiner",
+          "Amount": 3,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "lightbulb",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Security System Bundle",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 2000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalspring",
+          "Amount": 6,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "targeting.computer",
+          "Amount": 3,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 5,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 25,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 10,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "autoturret",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "cctv.camera",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "computerstation",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "ammo.rifle",
+          "Amount": 500,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "security",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Weapons Arsenal",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 1500,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "smgbody",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "riflebody",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalspring",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 6,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalpipe",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 3,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "smg.thompson",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "rifle.semiauto",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "shotgun.pump",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "pistol.revolver",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "crossbow",
+          "Amount": 2,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "weapon",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Armor Crafting Station",
+      "Required Items": [
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 40,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 300,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "leather",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "sewingkit",
+          "Amount": 5,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "roadsigns",
+          "Amount": 8,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "metal.facemask",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "metal.plate.torso",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "roadsign.jacket",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "roadsign.kilt",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "roadsign.gloves",
+          "Amount": 1,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "clothing",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Vehicle Parts Depot",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 1200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 10,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalspring",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalpipe",
+          "Amount": 6,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 20,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 4,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "carburetor1",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "crankshaft1",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "sparkplug1",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "valve1",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "piston1",
+          "Amount": 4,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "gear",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Fuel Production Plant",
+      "Required Items": [
+        {
+          "Item Shortname": "crude.oil",
+          "Amount": 500,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "fat.animal",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 150,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 300,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "wood",
+          "Amount": 800,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "lowgradefuel",
+          "Amount": 400,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "diesel_barrel",
+          "Amount": 50,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "torch",
+          "Amount": 10,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "lantern",
+          "Amount": 3,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "small.oil.refinery",
+          "Amount": 1,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "cooking",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "Research Laboratory",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 800,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 10,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "targeting.computer",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "wood",
+          "Amount": 1000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 200,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "research.table",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "workbench1",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "workbench2",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "researchpaper",
+          "Amount": 50,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "blueprint",
+          "Amount": 20,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "blueprint",
+      "Permission Required": ""
+    },
+    {
+      "Display Name": "VIP Command Center",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 3000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 50,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "targeting.computer",
+          "Amount": 5,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalspring",
+          "Amount": 12,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 25,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 1,
+          "Value": "kit vip {player}",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "supply.signal",
+          "Amount": 3,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "autoturret",
+          "Amount": 3,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "cctv.camera",
+          "Amount": 6,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "gem",
+      "Permission Required": "npctrader.vip"
+    },
+    {
+      "Display Name": "Elite Weapon Cache",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 2500,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "riflebody",
+          "Amount": 3,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "smgbody",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalspring",
+          "Amount": 15,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 10,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metalpipe",
+          "Amount": 8,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 6,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "rifle.ak",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "rifle.bolt",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "smg.mp5",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "rocket.launcher",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "ammo.rifle",
+          "Amount": 300,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "ammo.rocket.basic",
+          "Amount": 4,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "crate",
+      "Permission Required": "npctrader.vip"
+    },
+    {
+      "Display Name": "Fortress Defense Package",
+      "Required Items": [
+        {
+          "Item Shortname": "stones",
+          "Amount": 5000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.fragments",
+          "Amount": 2000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 100,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "scrap",
+          "Amount": 1500,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 30,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 500,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "wall.external.high.stone",
+          "Amount": 10,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "gates.external.high.stone",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "flameturret",
+          "Amount": 4,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "guntrap",
+          "Amount": 6,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "trap.landmine",
+          "Amount": 8,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "construction",
+      "Permission Required": "npctrader.vip"
+    },
+    {
+      "Display Name": "Master Craftsman Kit",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 2000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 20,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 75,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "gears",
+          "Amount": 20,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "wood",
+          "Amount": 3000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 800,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "workbench3",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "mixingtable",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "research.table",
+          "Amount": 2,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "furnace.large",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "box.repair.bench",
+          "Amount": 2,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "gear",
+      "Permission Required": "npctrader.vip"
+    },
+    {
+      "Display Name": "Ultimate Survival Package",
+      "Required Items": [
+        {
+          "Item Shortname": "scrap",
+          "Amount": 5000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "metal.refined",
+          "Amount": 200,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "cloth",
+          "Amount": 1000,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "leather",
+          "Amount": 500,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "rope",
+          "Amount": 50,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "techparts",
+          "Amount": 25,
+          "Skin ID": 0
+        },
+        {
+          "Item Shortname": "targeting.computer",
+          "Amount": 10,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 1,
+          "Value": "kit elite {player}",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 2,
+          "Value": "admin.fly",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "heavy.plate.helmet",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "heavy.plate.jacket",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "heavy.plate.pants",
+          "Amount": 1,
+          "Skin ID": 0
+        },
+        {
+          "Type": 0,
+          "Value": "supply.signal",
+          "Amount": 5,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "gem2",
+      "Permission Required": "npctrader.vip"
+    },
+    {
+      "Display Name": "New Trade Offer",
+      "Required Items": [
+        {
+          "Item Shortname": "wood",
+          "Amount": 500,
+          "Skin ID": 0
+        }
+      ],
+      "Rewards": [
+        {
+          "Type": 0,
+          "Value": "metal.fragments",
+          "Amount": 50,
+          "Skin ID": 0
+        }
+      ],
+      "Icon": "ore",
+      "Permission Required": ""
+    }
+  ]
+}
