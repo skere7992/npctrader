@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #1E2020 0%, #2A2D2D 50%, #738D45 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .slider {
+    background: linear-gradient(to right, #2A2D2D 0%, #738D45 100%);
+  }
+  
+  .slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #738D45;
+    cursor: pointer;
+    border: 2px solid #E4DAD1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #738D45;
+    cursor: pointer;
+    border: 2px solid #E4DAD1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2A2D2D;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #738D45;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B8B4B;
+}
+
+/* Rust-themed animations */
+@keyframes rust-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(115, 141, 69, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(115, 141, 69, 0.8);
+  }
+}
+
+.rust-glow {
+  animation: rust-glow 2s ease-in-out infinite;
+}
+
+/* Input focus styles */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #738D45;
+  box-shadow: 0 0 0 3px rgba(115, 141, 69, 0.1);
+}
+
+/* Button hover effects */
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Card hover effects */
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(115, 141, 69, 0.15);
+}
+
+/* Backdrop blur support */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Custom checkbox styles */
+input[type="checkbox"]:checked {
+  background-color: #738D45;
+  border-color: #738D45;
+}
+
+input[type="checkbox"]:checked:hover {
+  background-color: #6B8B4B;
+  border-color: #6B8B4B;
+}
+
+/* Loading animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #738D45, #6B8B4B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Rust metal texture effect */
+.rust-texture {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(115, 141, 69, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(107, 139, 75, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(115, 141, 69, 0.05) 0%, transparent 50%);
+}
+
+/* Brand colors from the palette */
+.bg-brand-grey { background-color: #A4A6A7; }
+.bg-brand-rust-red { background-color: #CD412B; }
+.bg-brand-charcoal { background-color: #1E2020; }
+.bg-brand-green { background-color: #738D45; }
+.bg-brand-orange { background-color: #C26D33; }
+.bg-brand-blue { background-color: #1F6BAD; }
+.bg-brand-cream { background-color: #E4DAD1; }
+
+.text-brand-grey { color: #A4A6A7; }
+.text-brand-rust-red { color: #CD412B; }
+.text-brand-charcoal { color: #1E2020; }
+.text-brand-green { color: #738D45; }
+.text-brand-orange { color: #C26D33; }
+.text-brand-blue { color: #1F6BAD; }
+.text-brand-cream { color: #E4DAD1; }
+
+.border-brand-grey { border-color: #A4A6A7; }
+.border-brand-rust-red { border-color: #CD412B; }
+.border-brand-charcoal { border-color: #1E2020; }
+.border-brand-green { border-color: #738D45; }
+.border-brand-orange { border-color: #C26D33; }
+.border-brand-blue { border-color: #1F6BAD; }
+.border-brand-cream { border-color: #E4DAD1; }
