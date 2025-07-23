@@ -1045,6 +1045,13 @@ export const getIconCacheStats = () => {
   return iconManager.getCacheStats();
 };
 
+export const getItemDisplayName = (itemShortname: string): string => {
+  return ITEM_DISPLAY_NAMES[itemShortname] || itemShortname
+    .split('.')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
 // Helper function to get item display name (sin cambios)
 export const getItemDisplayName = (itemShortname: string): string => {
   return ITEM_DISPLAY_NAMES[itemShortname] || itemShortname
