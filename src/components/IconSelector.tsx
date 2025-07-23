@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AVAILABLE_ICONS, getItemIconUrl } from '../types/config';
+import { AVAILABLE_ICONS } from '../types/config';
 import { Search, Star, Package } from 'lucide-react';
 
 interface IconSelectorProps {
@@ -9,46 +9,15 @@ interface IconSelectorProps {
   className?: string;
 }
 
-// Componente para manejar iconos con fallback
+// Componente simple para mostrar nombre del icono (sin imagen externa)
 const IconDisplay: React.FC<{ 
   iconName: string; 
   className?: string; 
   size?: string;
 }> = ({ iconName, className = "", size = "w-6 h-6" }) => {
-  const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
-    setHasError(false);
-  };
-
-  const handleImageError = () => {
-    setIsLoading(false);
-    setHasError(true);
-  };
-
-  if (hasError) {
-    return (
-      <div className={`${size} ${className} bg-brand-charcoal border border-brand-green/30 rounded flex items-center justify-center`}>
-        <Star className="w-3 h-3 text-brand-green/60" />
-      </div>
-    );
-  }
-
   return (
-    <div className={`${size} ${className} relative`}>
-      {isLoading && (
-        <div className={`${size} bg-brand-charcoal border border-brand-green/30 rounded animate-pulse`} />
-      )}
-      <img
-        src={getItemIconUrl(iconName)}
-        alt={iconName}
-        className={`${size} rounded object-cover ${isLoading ? 'absolute opacity-0' : 'opacity-100'} transition-opacity duration-200`}
-        onLoad={handleImageLoad}
-        onError={handleImageError}
-        loading="lazy"
-      />
+    <div className={`${size} ${className} bg-brand-charcoal border border-brand-green/50 rounded flex items-center justify-center`}>
+      <Star className="w-3 h-3 text-brand-green" />
     </div>
   );
 };
@@ -64,7 +33,7 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
 
   const filteredIcons = AVAILABLE_ICONS.filter(icon =>
     icon.toLowerCase().includes(searchTerm.toLowerCase())
-  ).slice(0, 50); // Limitar a 50 para mejor rendimiento
+  ).slice(0, 50);
 
   const handleSelect = (icon: string) => {
     onChange(icon);
@@ -88,7 +57,7 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
           className="mr-2" 
           size="w-6 h-6"
         />
-        <span className="flex-1 text-left font-mono">{value}</span>
+        <span className="flex-1 text-left font-mono text-brand-green">{value}</span>
       </button>
 
       {isOpen && (
@@ -108,23 +77,21 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
           </div>
           
           <div className="max-h-48 overflow-y-auto">
-            <div className="grid grid-cols-4 gap-1 p-2">
+            <div className="space-y-1 p-2">
               {filteredIcons.map(icon => (
                 <button
                   key={icon}
                   type="button"
                   onClick={() => handleSelect(icon)}
-                  className="flex flex-col items-center p-2 hover:bg-brand-charcoal/60 rounded transition-colors"
-                  title={icon}
+                  className="w-full flex items-center p-2 hover:bg-brand-charcoal/60 rounded transition-colors text-left"
+                  title={`Rust internal icon: ${icon}`}
                 >
                   <IconDisplay 
                     iconName={icon} 
-                    className="mb-1" 
-                    size="w-8 h-8"
+                    className="mr-3" 
+                    size="w-6 h-6"
                   />
-                  <span className="text-xs text-brand-grey truncate w-full text-center font-mono">
-                    {icon.length > 8 ? `${icon.substring(0, 8)}...` : icon}
-                  </span>
+                  <span className="text-sm text-brand-cream font-mono">{icon}</span>
                 </button>
               ))}
             </div>
@@ -142,6 +109,12 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
                 Showing first 50 results. Refine your search for more specific results.
               </div>
             )}
+          </div>
+          
+          <div className="px-3 py-2 bg-brand-charcoal/50 border-t border-brand-green/30">
+            <p className="text-xs text-brand-grey">
+              These are Rust internal icon names. The game will display the actual icons.
+            </p>
           </div>
         </div>
       )}
