@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AVAILABLE_ICONS, getItemIconUrl } from '../types/config';
+import { AVAILABLE_ICONS } from '../types/config';
 import { Search, Star, Package } from 'lucide-react';
 
 interface IconSelectorProps {
@@ -9,6 +9,7 @@ interface IconSelectorProps {
   className?: string;
 }
 
+// Componente para mostrar iconos reales (con PNG)
 const IconDisplay: React.FC<{ 
   iconName: string; 
   className?: string; 
@@ -27,10 +28,11 @@ const IconDisplay: React.FC<{
     setHasError(true);
   };
 
+  // Si hay error, mostrar placeholder
   if (hasError) {
     return (
-      <div className={`${size} ${className} bg-brand-charcoal border border-brand-green/30 rounded flex items-center justify-center`}>
-        <Star className="w-3 h-3 text-brand-green/60" />
+      <div className={`${size} ${className} bg-brand-charcoal border border-brand-green/50 rounded flex items-center justify-center`}>
+        <Star className="w-3 h-3 text-brand-green" />
       </div>
     );
   }
@@ -41,7 +43,7 @@ const IconDisplay: React.FC<{
         <div className={`${size} bg-brand-charcoal border border-brand-green/30 rounded animate-pulse`} />
       )}
       <img
-        src={getItemIconUrl(iconName)}
+        src={`./icons/${iconName}.png`} // Usar ruta relativa a los PNGs
         alt={iconName}
         className={`${size} rounded object-cover ${isLoading ? 'absolute opacity-0' : 'opacity-100'} transition-opacity duration-200`}
         onLoad={handleImageLoad}
@@ -63,7 +65,7 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
 
   const filteredIcons = AVAILABLE_ICONS.filter(icon =>
     icon.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  ); // Quitar el límite .slice(0, 50)
 
   const handleSelect = (icon: string) => {
     onChange(icon);
@@ -87,11 +89,11 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
           className="mr-2" 
           size="w-6 h-6"
         />
-        <span className="flex-1 text-left font-mono">{value}</span>
+        <span className="flex-1 text-left font-mono text-brand-green">{value}</span>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 z-50 mt-1 bg-brand-charcoal border border-brand-green rounded-lg shadow-xl max-h-64 overflow-hidden">
+        <div className="absolute top-full left-0 right-0 z-50 mt-1 bg-brand-charcoal border border-brand-green rounded-lg shadow-xl max-h-96 overflow-hidden"> {/* Aumentar de 64 a 96 */}
           <div className="p-2 border-b border-brand-green/30">
             <div className="relative">
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-brand-green" />
@@ -106,23 +108,23 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
             </div>
           </div>
           
-          <div className="max-h-48 overflow-y-auto">
-            <div className="grid grid-cols-4 gap-1 p-2">
+          <div className="max-h-80 overflow-y-auto"> {/* Aumentar altura de 48 a 80 */}
+            <div className="grid grid-cols-3 gap-2 p-2"> {/* Cambiar a grid de 3 columnas */}
               {filteredIcons.map(icon => (
                 <button
                   key={icon}
                   type="button"
                   onClick={() => handleSelect(icon)}
                   className="flex flex-col items-center p-2 hover:bg-brand-charcoal/60 rounded transition-colors"
-                  title={icon}
+                  title={`Icon: ${icon}`}
                 >
                   <IconDisplay 
                     iconName={icon} 
-                    className="mb-1" 
+                    className="mb-2" 
                     size="w-8 h-8"
                   />
-                  <span className="text-xs text-brand-grey truncate w-full text-center font-mono">
-                    {icon.length > 8 ? `${icon.substring(0, 8)}...` : icon}
+                  <span className="text-xs text-brand-cream font-mono text-center truncate w-full">
+                    {icon.length > 10 ? `${icon.substring(0, 10)}...` : icon}
                   </span>
                 </button>
               ))}
@@ -133,14 +135,12 @@ export const IconSelector: React.FC<IconSelectorProps> = ({
                 No icons found matching "{searchTerm}"
               </div>
             )}
-
-            {searchTerm && AVAILABLE_ICONS.filter(icon =>
-              icon.toLowerCase().includes(searchTerm.toLowerCase())
-            ).length > 50 && (
-              <div className="px-3 py-2 text-center text-brand-grey text-xs border-t border-brand-green/30">
-                Showing first 50 results. Refine your search for more specific results.
-              </div>
-            )}
+          </div>
+          
+          <div className="px-3 py-2 bg-brand-charcoal/50 border-t border-brand-green/30">
+            <p className="text-xs text-brand-grey">
+              These are Rust internal icons. Select one to use in your trade offers.
+            </p>
           </div>
         </div>
       )}
