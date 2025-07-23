@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NPCTraderConfig, SKIN_SETS } from './types/config';
 import { ColorPicker } from './components/ColorPicker';
 import { TradeOfferEditor } from './components/TradeOfferEditor';
+import { OutfitBuilder } from './components/OutfitBuilder';
 import { 
   Download, 
   Upload, 
@@ -294,49 +295,49 @@ function App() {
                     NPC Appearance
                   </h2>
                   
-                  <div>
-                    <label className="block text-sm font-medium text-brand-cream mb-2">Skin Set</label>
-                    <select
-                      value={config["NPC Appearance"]["Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)"]}
-                      onChange={(e) => updateConfig({
-                        "NPC Appearance": {
-                          ...config["NPC Appearance"],
-                          "Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)": e.target.value
-                        }
-                      })}
-                      className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
-                    >
-                      <option value="">Select a skin set...</option>
-                      {SKIN_SETS.map(set => (
-                        <option key={set} value={set}>{set}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold text-brand-cream mb-4">Custom Items with Skins</h3>
-                    <div className="space-y-3">
-                      {Object.entries(config["NPC Appearance"]["Custom Items with Skins (overrides preset if specified)"]).map(([item, skinId]) => (
-                        <div key={item} className="flex items-center space-x-3">
-                          <span className="text-brand-grey w-32">{item}:</span>
-                          <input
-                            type="number"
-                            value={skinId}
-                            onChange={(e) => updateConfig({
-                              "NPC Appearance": {
-                                ...config["NPC Appearance"],
-                                "Custom Items with Skins (overrides preset if specified)": {
-                                  ...config["NPC Appearance"]["Custom Items with Skins (overrides preset if specified)"],
-                                  [item]: parseInt(e.target.value) || 0
-                                }
-                              }
-                            })}
-                            className="flex-1 px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
-                          />
+                  {/* Preset Skin Sets */}
+                  <div className="bg-brand-charcoal/30 rounded-lg p-4 border border-brand-green/20">
+                    <h3 className="text-lg font-semibold text-brand-cream mb-3 flex items-center">
+                      <Palette className="w-5 h-5 mr-2" />
+                      Preset Skin Sets
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-brand-cream mb-2">Choose Preset</label>
+                        <select
+                          value={config["NPC Appearance"]["Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)"]}
+                          onChange={(e) => updateConfig({
+                            "NPC Appearance": {
+                              ...config["NPC Appearance"],
+                              "Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)": e.target.value
+                            }
+                          })}
+                          className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
+                        >
+                          <option value="">Custom Outfit (use builder below)</option>
+                          {SKIN_SETS.map(set => (
+                            <option key={set} value={set}>{set}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="flex items-end">
+                        <div className="text-sm text-brand-grey">
+                          💡 Preset will be overridden by custom items below
                         </div>
-                      ))}
+                      </div>
                     </div>
                   </div>
+
+                  {/* Outfit Builder */}
+                  <OutfitBuilder
+                    customItems={config["NPC Appearance"]["Custom Items with Skins (overrides preset if specified)"]}
+                    onChange={(customItems) => updateConfig({
+                      "NPC Appearance": {
+                        ...config["NPC Appearance"],
+                        "Custom Items with Skins (overrides preset if specified)": customItems
+                      }
+                    })}
+                  />
                 </div>
               )}
 
