@@ -23,11 +23,85 @@ function App() {
   const [activeTab, setActiveTab] = useState('general');
 
   useEffect(() => {
-    // Load the default config
-    fetch('/NPCTrader.json')
-      .then(response => response.json())
+    // Load the default config - usar ruta relativa para GitHub Pages
+    fetch('./NPCTrader.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => setConfig(data))
-      .catch(error => console.error('Error loading config:', error));
+      .catch(error => {
+        console.error('Error loading config:', error);
+        // Fallback: crear configuración por defecto si no se puede cargar
+        setConfig({
+          "NPC Display Name": "Trader Bob",
+          "NPC Appearance": {
+            "Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)": "MerchantRobes",
+            "Custom Items with Skins (overrides preset if specified)": {
+              "attire.hide.vest": 0,
+              "attire.hide.pants": 0,
+              "shoes.boots": 0,
+              "hat.cap": 0
+            }
+          },
+          "Default Cooldown (seconds)": 300,
+          "VIP Cooldown (seconds)": 150,
+          "Language Settings": {
+            "Default Language": "en",
+            "Allow Per-Player Language": true
+          },
+          "NCP Integration": {
+            "Enable NCP Integration": true,
+            "Use Chat Fallback if NCP Unavailable": true,
+            "Notification Types": {
+              "Trade Success Notifications": true,
+              "Trade Error Notifications": true,
+              "Cooldown Notifications": true,
+              "Permission Error Notifications": true,
+              "Configuration Change Notifications": false,
+              "NPC Management Notifications": false,
+              "Conversation Notifications": true,
+              "General Info Notifications": true
+            }
+          },
+          "UI Settings": {
+            "Main Panel Color": "#2A2D2D",
+            "Header Color": "#1E2020",
+            "Button Color": "#738D45",
+            "Text Color": "#E4DAD1",
+            "Background Color": "#1E2020E6",
+            "Border Color": "#738D45",
+            "Success Color": "#738D45",
+            "Error Color": "#CD412B",
+            "Warning Color": "#C26D33",
+            "Info Color": "#1F6BAD"
+          },
+          "Trade Offers": [
+            {
+              "Display Name": "Wood for Metal",
+              "Required Items": [
+                {
+                  "Item Shortname": "wood",
+                  "Amount": 1000,
+                  "Skin ID": 0
+                }
+              ],
+              "Rewards": [
+                {
+                  "Type": 0,
+                  "Value": "metal.fragments",
+                  "Amount": 500,
+                  "Skin ID": 0
+                }
+              ],
+              "Icon": "wood",
+              "Permission Required": ""
+            }
+          ]
+        } as NPCTraderConfig);
+      });
   }, []);
 
   const updateConfig = (updates: Partial<NPCTraderConfig>) => {
