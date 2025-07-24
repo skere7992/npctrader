@@ -20,18 +20,20 @@ export interface TranslationResult {
  * Translates text using DeepL API
  */
 async function translateText(text: string, targetLanguage: string): Promise<string> {
-  const formData = new FormData();
-  formData.append('auth_key', DEEPL_API_KEY);
-  formData.append('text', text);
-  formData.append('target_lang', targetLanguage);
-  formData.append('source_lang', 'EN');
-  formData.append('preserve_formatting', '1');
-  formData.append('tag_handling', 'xml');
-
   try {
     const response = await fetch(DEEPL_API_URL, {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `DeepL-Auth-Key ${DEEPL_API_KEY}`
+      },
+      body: JSON.stringify({
+        "text": [text],
+        "target_lang": targetLanguage,
+        "source_lang": "EN",
+        "preserve_formatting": true,
+        "tag_handling": "xml"
+      })
     });
 
     if (!response.ok) {
