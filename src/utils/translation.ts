@@ -1,11 +1,15 @@
 import { NPCTraderLanguageFile, DEFAULT_LANGUAGE_CONTENT, SupportedLanguage } from '../types/config';
 
 // DeepL API configuration
-const DEEPL_API_KEY = '774d119e-b7b4-4bfb-8279-f4b96572b0dc:fx';
+const DEEPL_API_KEY = '0feb9bff-7c03-41ff-9d34-fa108b2a910e:fx';
 const DEEPL_API_URL = 'https://api-free.deepl.com/v2/translate';
 
-// CORS proxy for development (remove in production)
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// Multiple CORS proxies for better reliability
+const CORS_PROXIES = [
+  'https://api.allorigins.win/raw?url=',
+  'https://corsproxy.io/?',
+  'https://cors-anywhere.herokuapp.com/'
+];
 
 export interface TranslationProgress {
   current: number;
@@ -20,55 +24,73 @@ export interface TranslationResult {
 }
 
 /**
- * Translates text using DeepL API with CORS proxy
+ * Translates text using DeepL API with multiple CORS proxy fallbacks
  */
 async function translateText(text: string, targetLanguage: string): Promise<string> {
-  try {
-    // For browser requests, we need to use a CORS proxy or backend service
-    const url = `${CORS_PROXY}${encodeURIComponent(DEEPL_API_URL)}`;
-    
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `DeepL-Auth-Key ${DEEPL_API_KEY}`,
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        text: [text],
-        target_lang: targetLanguage,
-        source_lang: 'EN',
-        preserve_formatting: true,
-        tag_handling: 'xml'
-      })
-    });
+  let lastError: Error | null = null;
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`DeepL API error: ${response.status} ${response.statusText}. ${errorText}`);
-    }
+  // Try each CORS proxy
+  for (const proxy of CORS_PROXIES) {
+    try {
+      console.log(`Attempting translation with proxy: ${proxy}`);
+      
+      const url = `${proxy}${encodeURIComponent(DEEPL_API_URL)}`;
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+      
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `DeepL-Auth-Key ${DEEPL_API_KEY}`,
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          text: [text],
+          target_lang: targetLanguage,
+          source_lang: 'EN',
+          preserve_formatting: true,
+          tag_handling: 'xml'
+        }),
+        signal: controller.signal
+      });
 
-    const result = await response.json();
+      clearTimeout(timeoutId);
 
-    if (!result.translations || !result.translations[0]) {
-      throw new Error('Invalid response from DeepL API');
-    }
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
 
-    return result.translations[0].text;
-  } catch (error) {
-    console.error('Translation error:', error);
-    
-    // More specific error messages
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      throw new Error('Network error: Unable to connect to DeepL API. Check your internet connection.');
+      const result = await response.json();
+
+      if (!result.translations || !result.translations[0]) {
+        throw new Error('Invalid response format from DeepL API');
+      }
+
+      console.log(`Translation successful with proxy: ${proxy}`);
+      return result.translations[0].text;
+      
+    } catch (error) {
+      console.warn(`Proxy ${proxy} failed:`, error);
+      lastError = error instanceof Error ? error : new Error('Unknown error');
+      // Continue to next proxy
     }
-    
-    if (error instanceof Error && error.message.includes('CORS')) {
-      throw new Error('CORS error: Direct browser access to DeepL API is restricted. Consider using a backend service.');
-    }
-    
-    throw error;
   }
+
+  // If all proxies failed, throw the last error
+  if (lastError) {
+    if (lastError.name === 'AbortError') {
+      throw new Error('Request timeout: All CORS proxies took too long to respond');
+    }
+    if (lastError.message.includes('fetch')) {
+      throw new Error('Network error: Unable to connect to DeepL API through any proxy. Check your internet connection and API key.');
+    }
+    throw new Error(`All CORS proxies failed. Last error: ${lastError.message}`);
+  }
+  
+  throw new Error('Translation failed: No proxies available');
 }
 
 /**
@@ -184,20 +206,14 @@ export async function translateLanguageFile(
         // Preprocess text to preserve placeholders
         const preprocessed = preprocessText(value);
 
-        // Try direct translation first, then fallback to CORS proxy
-        let translated: string;
-        try {
-          translated = await translateTextDirect(preprocessed, targetLanguage.deeplCode);
-        } catch (directError) {
-          console.warn(`Direct translation failed for "${key}", trying CORS proxy:`, directError);
-          translated = await translateText(preprocessed, targetLanguage.deeplCode);
-        }
+        // Use CORS proxy method (more reliable for browser)
+        const translated = await translateText(preprocessed, targetLanguage.deeplCode);
 
         // Postprocess to restore placeholders
         translatedContent[key] = postprocessText(translated);
 
-        // Small delay to avoid rate limiting
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Delay to avoid rate limiting
+        await new Promise(resolve => setTimeout(resolve, 800));
 
       } catch (error) {
         console.error(`Error translating key "${key}":`, error);
@@ -240,24 +256,31 @@ export function downloadLanguageFile(content: NPCTraderLanguageFile, languageCod
 }
 
 /**
- * Validates DeepL API connectivity with fallback methods
+ * Validates DeepL API connectivity with multiple fallback methods
  */
 export async function validateDeepLAPI(): Promise<{ valid: boolean; error?: string }> {
   try {
+    console.log('Validating DeepL API with key:', DEEPL_API_KEY.substring(0, 8) + '...');
+    
     const testText = 'Hello world';
     
-    // Try direct connection first
+    // Try direct connection first (will likely fail due to CORS)
     try {
+      console.log('Attempting direct API connection...');
       await translateTextDirect(testText, 'ES');
+      console.log('Direct API connection successful!');
       return { valid: true };
     } catch (directError) {
-      console.warn('Direct API validation failed, trying CORS proxy:', directError);
+      console.warn('Direct API connection failed (expected due to CORS):', directError);
       
-      // Fallback to CORS proxy
+      // Fallback to CORS proxies
       try {
+        console.log('Attempting CORS proxy connections...');
         await translateText(testText, 'ES');
+        console.log('CORS proxy connection successful!');
         return { valid: true };
       } catch (proxyError) {
+        console.error('All connection methods failed:', proxyError);
         throw proxyError;
       }
     }
@@ -265,17 +288,24 @@ export async function validateDeepLAPI(): Promise<{ valid: boolean; error?: stri
     let errorMessage = 'API validation failed';
     
     if (error instanceof Error) {
-      if (error.message.includes('CORS')) {
-        errorMessage = 'CORS error: DeepL API cannot be accessed directly from browser. Consider using a backend service.';
-      } else if (error.message.includes('Network')) {
-        errorMessage = 'Network error: Check your internet connection and API key.';
+      if (error.message.includes('HTTP 403') || error.message.includes('Authentication failed')) {
+        errorMessage = 'Invalid API key: Please check your DeepL API key is correct and active.';
+      } else if (error.message.includes('HTTP 456')) {
+        errorMessage = 'Quota exceeded: Your DeepL API usage limit has been reached.';
+      } else if (error.message.includes('CORS')) {
+        errorMessage = 'CORS error: Browser security restrictions prevent direct API access.';
+      } else if (error.message.includes('Network') || error.message.includes('fetch')) {
+        errorMessage = 'Network error: Check your internet connection and firewall settings.';
       } else if (error.message.includes('timeout')) {
-        errorMessage = 'Timeout error: DeepL API is not responding.';
+        errorMessage = 'Timeout error: DeepL API or proxies are not responding.';
+      } else if (error.message.includes('All CORS proxies failed')) {
+        errorMessage = 'Connection failed: All proxy services are unavailable. Try again later or check your internet connection.';
       } else {
-        errorMessage = error.message;
+        errorMessage = `API Error: ${error.message}`;
       }
     }
     
+    console.error('API validation failed:', errorMessage);
     return {
       valid: false,
       error: errorMessage
