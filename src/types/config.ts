@@ -8,6 +8,104 @@ export interface LanguageSettings {
   "Allow Per-Player Language": boolean;
 }
 
+// Supported languages for translation
+export interface SupportedLanguage {
+  code: string;
+  name: string;
+  deeplCode: string;
+}
+
+export const SUPPORTED_LANGUAGES: SupportedLanguage[] = [
+  { code: 'af', name: 'Afrikaans', deeplCode: 'AF' },
+  { code: 'ar', name: 'Arabic', deeplCode: 'AR' },
+  { code: 'ca', name: 'Catalan', deeplCode: 'CA' },
+  { code: 'cs', name: 'Czech', deeplCode: 'CS' },
+  { code: 'da', name: 'Danish', deeplCode: 'DA' },
+  { code: 'de', name: 'German', deeplCode: 'DE' },
+  { code: 'el', name: 'Greek', deeplCode: 'EL' },
+  { code: 'en', name: 'English', deeplCode: 'EN' },
+  { code: 'es-ES', name: 'Spanish (Spain)', deeplCode: 'ES' },
+  { code: 'fi', name: 'Finnish', deeplCode: 'FI' },
+  { code: 'fr', name: 'French', deeplCode: 'FR' },
+  { code: 'he', name: 'Hebrew', deeplCode: 'HE' },
+  { code: 'hu', name: 'Hungarian', deeplCode: 'HU' },
+  { code: 'it', name: 'Italian', deeplCode: 'IT' },
+  { code: 'ja', name: 'Japanese', deeplCode: 'JA' },
+  { code: 'ko', name: 'Korean', deeplCode: 'KO' },
+  { code: 'nl', name: 'Dutch', deeplCode: 'NL' },
+  { code: 'no', name: 'Norwegian', deeplCode: 'NB' },
+  { code: 'pl', name: 'Polish', deeplCode: 'PL' },
+  { code: 'pt-BR', name: 'Portuguese (Brazil)', deeplCode: 'PT-BR' },
+  { code: 'pt-PT', name: 'Portuguese (Portugal)', deeplCode: 'PT-PT' },
+  { code: 'ro', name: 'Romanian', deeplCode: 'RO' },
+  { code: 'ru', name: 'Russian', deeplCode: 'RU' },
+  { code: 'sr', name: 'Serbian', deeplCode: 'SR' },
+  { code: 'sv-SE', name: 'Swedish', deeplCode: 'SV' },
+  { code: 'tr', name: 'Turkish', deeplCode: 'TR' },
+  { code: 'uk', name: 'Ukrainian', deeplCode: 'UK' },
+  { code: 'vi', name: 'Vietnamese', deeplCode: 'VI' },
+  { code: 'zh-CN', name: 'Chinese (Simplified)', deeplCode: 'ZH-CN' },
+  { code: 'zh-TW', name: 'Chinese (Traditional)', deeplCode: 'ZH-TW' }
+];
+
+// Base language file structure for NPCTrader
+export interface NPCTraderLanguageFile {
+  "Greeting": string;
+  "GreetingWithStatus": string;
+  "VipStatus": string;
+  "OffersAvailable": string;
+  "OnCooldownGreeting": string;
+  "ShowTradesConfirmation": string;
+  "AboutServices": string;
+  "CooldownInfo": string;
+  "StandardCooldown": string;
+  "VipCooldown": string;
+  "OpeningInterface": string;
+  "Goodbye": string;
+  "Response_ShowTrades": string;
+  "Response_AboutServices": string;
+  "Response_MaybeLater": string;
+  "Response_Understand": string;
+  "Response_OpenInterface": string;
+  "Response_ServicesFirst": string;
+  "Response_NeverMind": string;
+  "Response_WhenCanTrade": string;
+  "Response_ThanksInfo": string;
+  "Response_SoundsGood": string;
+  "Response_ComeBackLater": string;
+  "Response_ThankYou": string;
+  "Response_Goodbye": string;
+}
+
+// Default English language file content
+export const DEFAULT_LANGUAGE_CONTENT: NPCTraderLanguageFile = {
+  "Greeting": "Greetings, {0}! I'm {1}, your local trader.",
+  "GreetingWithStatus": "Greetings, {0}{1}! I'm {2}, your local trader.",
+  "VipStatus": " (VIP Member)",
+  "OffersAvailable": "I have {0} trade offers available!",
+  "OnCooldownGreeting": "I'm sorry, but you must wait {0} before trading again.",
+  "ShowTradesConfirmation": "Excellent! Let me show you what I have available...",
+  "AboutServices": "I offer various trade packages for survivors like yourself. Bring me the required materials, and I'll give you valuable items in return.\\nEach trade has a cooldown period to keep things fair for everyone.",
+  "CooldownInfo": "You can trade again in {0}.\\nYou have a {1} cooldown period.",
+  "StandardCooldown": "Standard",
+  "VipCooldown": "VIP",
+  "OpeningInterface": "Opening my trading interface for you...",
+  "Goodbye": "Safe travels, friend! Come back anytime you need to trade.",
+  "Response_ShowTrades": "Show me your trades",
+  "Response_AboutServices": "Tell me about your services",
+  "Response_MaybeLater": "Maybe later",
+  "Response_Understand": "I understand, goodbye",
+  "Response_OpenInterface": "Open Trading Interface",
+  "Response_ServicesFirst": "Actually, tell me about your services first",
+  "Response_NeverMind": "Never mind",
+  "Response_WhenCanTrade": "When can I trade again?",
+  "Response_ThanksInfo": "Thanks for the info",
+  "Response_SoundsGood": "Sounds good, thanks",
+  "Response_ComeBackLater": "I'll come back later",
+  "Response_ThankYou": "Thank you",
+  "Response_Goodbye": "Goodbye"
+};
+
 export interface NotificationTypes {
   "Trade Success Notifications": boolean;
   "Trade Error Notifications": boolean;
