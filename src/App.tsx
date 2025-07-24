@@ -3,6 +3,7 @@ import { NPCTraderConfig, SKIN_SETS } from './types/config';
 import { ColorPicker } from './components/ColorPicker';
 import { TradeOfferEditor } from './components/TradeOfferEditor';
 import { OutfitBuilder } from './components/OutfitBuilder';
+import { LanguageCreator } from './components/LanguageCreator';
 import { 
   Download, 
   Upload, 
@@ -14,8 +15,6 @@ import {
   Palette, 
   ShoppingCart,
   Plus,
-  Save,
-  FileText,
   Wrench
 } from 'lucide-react';
 
@@ -33,8 +32,8 @@ function App() {
         return response.json();
       })
       .then(data => setConfig(data))
-      .catch(error => {
-        console.error('Error loading config:', error);
+      .catch(() => {
+        console.error('Error loading config');
         // Fallback: crear configuración por defecto si no se puede cargar
         setConfig({
           "NPC Display Name": "Trader Bob",
@@ -145,8 +144,8 @@ function App() {
         try {
           const uploadedConfig = JSON.parse(e.target?.result as string);
           setConfig(uploadedConfig);
-        } catch (error) {
-          alert('Error parsing JSON file');
+        } catch {
+          console.error('Error parsing JSON file');
         }
       };
       reader.readAsText(file);
@@ -410,6 +409,8 @@ function App() {
                       <label className="text-sm font-medium text-brand-cream">Allow Per-Player Language</label>
                     </div>
                   </div>
+                  {/* Language File Creator */}
+                  <LanguageCreator className="mt-8" />
                 </div>
               )}
 
