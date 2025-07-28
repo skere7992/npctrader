@@ -24,7 +24,8 @@ function App() {
 
   useEffect(() => {
     // Load the default config - usar ruta relativa para GitHub Pages
-    fetch('./NPCTrader.json')
+    const configUrl = `${import.meta.env.BASE_URL}NPCTrader.json`;
+    fetch(configUrl)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
