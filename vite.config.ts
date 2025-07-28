@@ -4,8 +4,10 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: process.env.VITE_BASE_PATH || '/', // Configurable base path
+  base: '/npctrader/', // Ruta base para GitHub Pages
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
 });
+VITE_BASE_PATH=/npctrader/
+npm run build
