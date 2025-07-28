@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import { getItemIconUrl, getItemDisplayName } from '../types/config';
-import { ItemSelector } from './ItemSelector';
 import { Search, User, Shirt, Shield, Eye, RotateCcw } from 'lucide-react';
-
-interface OutfitItem {
-  slot: string;
-  shortname: string;
-  skinId: number;
-  displayName: string;
-}
 
 interface OutfitBuilderProps {
   customItems: Record<string, number>;

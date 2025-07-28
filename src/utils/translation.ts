@@ -1,7 +1,7 @@
 import { NPCTraderLanguageFile, DEFAULT_LANGUAGE_CONTENT, SupportedLanguage } from '../types/config';
 
 // DeepL API configuration
-const DEEPL_API_KEY = '774d119e-b7b4-4bfb-8279-f4b96572b0dc:fx';
+const DEEPL_API_KEY = import.meta.env.VITE_DEEPL_API_KEY;
 const DEEPL_API_URL = 'https://api-free.deepl.com/v2/translate';
 
 export interface TranslationProgress {
@@ -20,6 +20,10 @@ export interface TranslationResult {
  * Translates text using DeepL API
  */
 async function translateText(text: string, targetLanguage: string): Promise<string> {
+  if (!DEEPL_API_KEY) {
+    throw new Error('DeepL API key is not configured. Please set the VITE_DEEPL_API_KEY environment variable.');
+  }
+
   const formData = new FormData();
   formData.append('auth_key', DEEPL_API_KEY);
   formData.append('text', text);

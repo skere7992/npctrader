@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AVAILABLE_ICONS } from '../types/config';
-import { Search, Star, Package } from 'lucide-react';
+import { Search, Star } from 'lucide-react';
 
 interface IconSelectorProps {
   value: string;
