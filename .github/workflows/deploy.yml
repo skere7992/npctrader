@@ -37,7 +37,7 @@ jobs:
       run: npm install
 
     - name: Build
-      run: npm run build
+      run: VITE_BASE_PATH=/npctrader/ npm run build
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
