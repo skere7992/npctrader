@@ -9,5 +9,3 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
 });
-VITE_BASE_PATH=/npctrader/
-npm run build
