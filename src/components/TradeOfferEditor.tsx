@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TradeOffer, RequiredItem, Reward, AVAILABLE_ICONS, RUST_ITEMS } from '../types/config';
+import { TradeOffer, RequiredItem, Reward } from '../types/config';
 import { ItemSelector } from './ItemSelector';
 import { IconSelector } from './IconSelector';
 import { Plus, Trash2, Package, Gift, ChevronDown, ChevronRight, Eye, EyeOff } from 'lucide-react';
