@@ -2,6 +2,23 @@ export interface NPCAppearance {
   "Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)": string;
   "Custom Items with Skins (overrides preset if specified)": Record<string, number>;
 }
+
+export interface StockSettings {
+  "Enable Stock Limit": boolean;
+  "Maximum Stock": number;
+  "Current Stock": number;
+  "Restock Amount": number;
+  "Restock Interval (seconds, 0 = disabled)": number;
+  "Reset Stock on Wipe": boolean;
+  "Last Restock Time": string;
+}
+
+export interface CooldownSettings {
+  "Enable Custom Cooldown": boolean;
+  "Cooldown (seconds)": number;
+  "VIP Cooldown (seconds)": number;
+}
+
 export interface LanguageSettings {
   "Default Language": string;
   "Allow Per-Player Language": boolean;
@@ -123,7 +140,69 @@ export interface NCPIntegration {
 }
 
 export interface UISettings {
-  [key: string]: string;
+  "Main Background Color": string;
+  "Header Background Color": string;
+  "Header Background Overlay Color": string;
+  "Header Title Text Color": string;
+  "Close Button Color": string;
+  "Close Button Text Color": string;
+  "Cooldown Info Text Color": string;
+  "Content Area Background Color": string;
+  "Panel Background Color": string;
+  "Panel Border Color": string;
+  "Panel Insufficient Items Overlay Color": string;
+  "Panel Insufficient Items Border Color": string;
+  "Trade Offer Header Section Color": string;
+  "Trade Offer Title Text Color": string;
+  "Trade Offer Title Locked Text Color": string;
+  "Trade Offer Title Insufficient Text Color": string;
+  "Main Icon Container Background Color": string;
+  "Main Icon Color": string;
+  "Main Icon Disabled Color": string;
+  "Required Items Header Color": string;
+  "Rewards Header Color": string;
+  "Item Container Color": string;
+  "Item Icon Color": string;
+  "Item Icon Disabled Color": string;
+  "Quantity Badge Color": string;
+  "Quantity Badge Text Color": string;
+  "More Items Indicator Color": string;
+  "Reward Icon Color": string;
+  "Reward Icon Disabled Color": string;
+  "Reward Special Icon Color": string;
+  "Button Color": string;
+  "Button Disabled Color": string;
+  "Button Success Icon Color": string;
+  "Button Success Text Color": string;
+  "Button Disabled Icon Color": string;
+  "Button Disabled Text Color": string;
+  "Button Insufficient Icon Color": string;
+  "Button Insufficient Text Color": string;
+  "Cooldown Panel Color": string;
+  "Cooldown Border Color": string;
+  "Cooldown Text Color": string;
+  "Cooldown Status Color": string;
+  "Available Status Color": string;
+  "VIP Badge Color": string;
+  "Scrollbar Track Color": string;
+  "Scrollbar Handle Color": string;
+  "No Offers Text Color": string;
+  "Confirmation Dialog Background Color": string;
+  "Confirmation Dialog Border Color": string;
+  "Confirmation Dialog Header Background Color": string;
+  "Confirmation Dialog Header Overlay Color": string;
+  "Confirmation Dialog Header Text Color": string;
+  "Confirmation Dialog Content Background Color": string;
+  "Confirmation Dialog Message Text Color": string;
+  "Confirmation Dialog Warning Icon Color": string;
+  "Confirmation Dialog Confirm Button Color": string;
+  "Confirmation Dialog Confirm Button Text Color": string;
+  "Confirmation Dialog Confirm Button Icon Color": string;
+  "Confirmation Dialog Cancel Button Color": string;
+  "Confirmation Dialog Cancel Button Text Color": string;
+  "Confirmation Dialog Cancel Button Icon Color": string;
+  "Confirmation Dialog Overlay Color": string;
+  [key: string]: string; // Allow additional colors
 }
 
 export interface RequiredItem {
@@ -145,6 +224,8 @@ export interface TradeOffer {
   "Rewards": Reward[];
   "Icon": string;
   "Permission Required": string;
+  "Stock Settings": StockSettings;
+  "Cooldown Settings": CooldownSettings;
 }
 
 export interface NPCTraderConfig {
@@ -152,6 +233,7 @@ export interface NPCTraderConfig {
   "NPC Appearance": NPCAppearance;
   "Default Cooldown (seconds)": number;
   "VIP Cooldown (seconds)": number;
+  "Stock Settings": StockSettings;
   "Language Settings": LanguageSettings;
   "NCP Integration": NCPIntegration;
   "UI Settings": UISettings;
@@ -1046,50 +1128,44 @@ export const ITEM_DISPLAY_NAMES: Record<string, string> = {
   'yellow.berry': 'Yellow Berry'
 };
 
-// Icon Manager optimizado con rustedit.io
+// Icon Manager for getting item icons
 class IconManager {
   private cache = new Map<string, string>();
   private sources = [
     {
       name: 'rustedit',
       baseUrl: 'https://www.rustedit.io/images/imagelibrary',
-      format: (name: string) => `${name}.png` // Mantiene puntos - compatible con ImageLibrary uMod
+      format: (name: string) => `${name}.png`
     },
     {
       name: 'rustlabs-fallback',
       baseUrl: 'https://rustlabs.com/img/items180',
-      format: (name: string) => `${name.replace(/\./g, '')}.png` // Remueve puntos para rustlabs
+      format: (name: string) => `${name.replace(/\./g, '')}.png`
     }
   ];
 
   private defaultIcon = 'https://www.rustedit.io/images/imagelibrary/stone.png';
 
-  // Obtener URL del icono (usa cache automático)
   getItemIconSync(itemShortname: string): string {
     if (this.cache.has(itemShortname)) {
       return this.cache.get(itemShortname)!;
     }
 
-    // Usar rustedit.io como fuente principal (ya probada y funcional)
     const url = `${this.sources[0].baseUrl}/${this.sources[0].format(itemShortname)}`;
     this.cache.set(itemShortname, url);
     return url;
   }
 
-  // Obtener URL con fallback (para casos donde necesites más robustez)
   getItemIconWithFallback(itemShortname: string): string {
-    // Si ya está en cache, usarlo
     if (this.cache.has(itemShortname)) {
       return this.cache.get(itemShortname)!;
     }
 
-    // Primera opción: rustedit.io (ya sabemos que funciona)
     const primaryUrl = `${this.sources[0].baseUrl}/${this.sources[0].format(itemShortname)}`;
     this.cache.set(itemShortname, primaryUrl);
     return primaryUrl;
   }
 
-  // Precargar iconos comunes para mejor rendimiento
   preloadCommonIcons(): void {
     const commonItems = [
       'wood', 'stone', 'metal.fragments', 'cloth', 'leather',
@@ -1100,12 +1176,10 @@ class IconManager {
     commonItems.forEach(item => this.getItemIconSync(item));
   }
 
-  // Limpiar cache
   clearCache(): void {
     this.cache.clear();
   }
 
-  // Obtener estadísticas del cache
   getCacheStats(): { size: number; items: string[] } {
     return {
       size: this.cache.size,
@@ -1114,35 +1188,34 @@ class IconManager {
   }
 }
 
-// Instancia global
 const iconManager = new IconManager();
 
-// Función principal - LA QUE DEBES USAR EN TUS COMPONENTES
+// Main function to get item icon URL
 export const getItemIconUrl = (itemShortname: string): string => {
   return iconManager.getItemIconSync(itemShortname);
 };
 
-// Función con fallback (opcional - para casos especiales)
+// Function with fallback
 export const getItemIconUrlWithFallback = (itemShortname: string): string => {
   return iconManager.getItemIconWithFallback(itemShortname);
 };
 
-// Función para precargar iconos comunes (opcional - para mejor rendimiento)
+// Preload common icons
 export const preloadCommonIcons = (): void => {
   iconManager.preloadCommonIcons();
 };
 
-// Función para limpiar cache (opcional - para desarrollo/debug)
+// Clear icon cache
 export const clearIconCache = (): void => {
   iconManager.clearCache();
 };
 
-// Función para obtener stats del cache (opcional - para debug)
+// Get cache stats
 export const getIconCacheStats = () => {
   return iconManager.getCacheStats();
 };
 
-// Helper function to get item display name (sin cambios)
+// Helper function to get item display name
 export const getItemDisplayName = (itemShortname: string): string => {
   return ITEM_DISPLAY_NAMES[itemShortname] || itemShortname
     .split('.')
