@@ -16,106 +16,15 @@ import {
   ShoppingCart,
   Plus,
   Wrench,
-  Package
+  Package  // Add this for Stock tab
 } from 'lucide-react';
-
-// Stock Settings Editor Component
-const StockSettingsEditor: React.FC<{
-  settings: StockSettings;
-  onChange: (settings: StockSettings) => void;
-  title?: string;
-}> = ({ settings, onChange, title = "Stock Settings" }) => {
-  const handleChange = (key: keyof StockSettings, value: any) => {
-    onChange({
-      ...settings,
-      [key]: value
-    });
-  };
-
-  return (
-    <div className="bg-gray-800 rounded-lg p-4">
-      <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-        <Package className="w-5 h-5" />
-        {title}
-      </h3>
-      
-      <div className="space-y-3">
-        <label className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={settings["Enable Stock Limit"]}
-            onChange={(e) => handleChange("Enable Stock Limit", e.target.checked)}
-            className="rounded"
-          />
-          <span>Enable Stock Limit</span>
-        </label>
-
-        {settings["Enable Stock Limit"] && (
-          <>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-sm mb-1">Maximum Stock</label>
-                <input
-                  type="number"
-                  value={settings["Maximum Stock"]}
-                  onChange={(e) => handleChange("Maximum Stock", parseInt(e.target.value))}
-                  className="w-full bg-gray-700 rounded px-3 py-1"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm mb-1">Current Stock</label>
-                <input
-                  type="number"
-                  value={settings["Current Stock"]}
-                  onChange={(e) => handleChange("Current Stock", parseInt(e.target.value))}
-                  className="w-full bg-gray-700 rounded px-3 py-1"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm mb-1">Restock Amount</label>
-                <input
-                  type="number"
-                  value={settings["Restock Amount"]}
-                  onChange={(e) => handleChange("Restock Amount", parseInt(e.target.value))}
-                  className="w-full bg-gray-700 rounded px-3 py-1"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm mb-1">Restock Interval (seconds)</label>
-                <input
-                  type="number"
-                  value={settings["Restock Interval (seconds, 0 = disabled)"]}
-                  onChange={(e) => handleChange("Restock Interval (seconds, 0 = disabled)", parseInt(e.target.value))}
-                  className="w-full bg-gray-700 rounded px-3 py-1"
-                />
-              </div>
-            </div>
-            
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={settings["Reset Stock on Wipe"]}
-                onChange={(e) => handleChange("Reset Stock on Wipe", e.target.checked)}
-                className="rounded"
-              />
-              <span>Reset Stock on Wipe</span>
-            </label>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
 
 function App() {
   const [config, setConfig] = useState<NPCTraderConfig | null>(null);
   const [activeTab, setActiveTab] = useState('general');
 
   useEffect(() => {
-    // Load the default config
+    // Load the default config - usar ruta relativa para GitHub Pages
     fetch('./NPCTrader.json')
       .then(response => {
         if (!response.ok) {
@@ -125,17 +34,22 @@ function App() {
       })
       .then(data => setConfig(data))
       .catch(() => {
-        console.error('Error loading config, using fallback');
-        // Fallback config with new structure
+        console.error('Error loading config');
+        // Fallback: crear configuración por defecto si no se puede cargar
         setConfig({
-          "NPC Display Name": "NPCTrader",
+          "NPC Display Name": "Trader Bob",
           "NPC Appearance": {
-            "Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)": "PirateTrader",
-            "Custom Items with Skins (overrides preset if specified)": {}
+            "Skin Set Name (Available: TacticalTrader, MerchantRobes, ArmoredGuard, WastelandScavenger, EliteOperator, PirateTrader, SurvivalExpert, ApocalypseSurvivor, ScientistResearcher, BanditLeader, ArcticWolf, BlackoutOperator, DesertOutlaw, DragonLord, RustmasTrader, CowboyTrader, NightStalker, SteampunkMerchant, VikingWarrior, AzulMerchant, ToxicMerchant, TribalHunter)": "MerchantRobes",
+            "Custom Items with Skins (overrides preset if specified)": {
+              "attire.hide.vest": 0,
+              "attire.hide.pants": 0,
+              "shoes.boots": 0,
+              "hat.cap": 0
+            }
           },
-          "Default Cooldown (seconds)": 3600,
-          "VIP Cooldown (seconds)": 1800,
-          "Stock Settings": {
+          "Default Cooldown (seconds)": 300,
+          "VIP Cooldown (seconds)": 150,
+          "Stock Settings": {  // Add this new section
             "Enable Stock Limit": false,
             "Maximum Stock": 100,
             "Current Stock": 100,
@@ -156,17 +70,60 @@ function App() {
               "Trade Error Notifications": true,
               "Cooldown Notifications": true,
               "Permission Error Notifications": true,
-              "Configuration Change Notifications": true,
-              "NPC Management Notifications": true,
-              "Conversation Notifications": false,
+              "Configuration Change Notifications": false,
+              "NPC Management Notifications": false,
+              "Conversation Notifications": true,
               "General Info Notifications": true
             }
           },
           "UI Settings": {
-            "Main Background Color": "#1E202095",
-            "Header Background Color": "#1E202080"
+            "Main Panel Color": "#2A2D2D",
+            "Header Color": "#1E2020",
+            "Button Color": "#738D45",
+            "Text Color": "#E4DAD1",
+            "Background Color": "#1E2020E6",
+            "Border Color": "#738D45",
+            "Success Color": "#738D45",
+            "Error Color": "#CD412B",
+            "Warning Color": "#C26D33",
+            "Info Color": "#1F6BAD"
           },
-          "Trade Offers": []
+          "Trade Offers": [
+            {
+              "Display Name": "Wood for Metal",
+              "Required Items": [
+                {
+                  "Item Shortname": "wood",
+                  "Amount": 1000,
+                  "Skin ID": 0
+                }
+              ],
+              "Rewards": [
+                {
+                  "Type": 0,
+                  "Value": "metal.fragments",
+                  "Amount": 500,
+                  "Skin ID": 0
+                }
+              ],
+              "Icon": "wood",
+              "Permission Required": "",
+              "Stock Settings": {
+                "Enable Stock Limit": false,
+                "Maximum Stock": 100,
+                "Current Stock": 100,
+                "Restock Amount": 100,
+                "Restock Interval (seconds, 0 = disabled)": 3600,
+                "Reset Stock on Wipe": true,
+                "Last Restock Time": "0001-01-01T00:00:00"
+              },
+              "Cooldown Settings": {
+                "Enable Custom Cooldown": false,
+                "Cooldown (seconds)": 3600,
+                "VIP Cooldown (seconds)": 1800
+              }
+            }
+          ]
         } as NPCTraderConfig);
       });
   }, []);
@@ -183,6 +140,18 @@ function App() {
         ...config,
         "UI Settings": {
           ...config["UI Settings"],
+          [key]: value
+        }
+      });
+    }
+  };
+
+  const updateStockSettings = (key: keyof StockSettings, value: any) => {
+    if (config && config["Stock Settings"]) {
+      setConfig({
+        ...config,
+        "Stock Settings": {
+          ...config["Stock Settings"],
           [key]: value
         }
       });
@@ -230,7 +199,7 @@ function App() {
   const tabs = [
     { id: 'general', label: 'General', icon: Settings },
     { id: 'appearance', label: 'Appearance', icon: User },
-    { id: 'stock', label: 'Stock', icon: Package },
+    { id: 'stock', label: 'Stock', icon: Package },  // Add this new tab
     { id: 'cooldowns', label: 'Cooldowns', icon: Clock },
     { id: 'language', label: 'Language', icon: Globe },
     { id: 'notifications', label: 'Notifications', icon: Bell },
@@ -345,14 +314,76 @@ function App() {
           </div>
         )}
 
-        {/* Stock Tab */}
+        {/* NEW Stock Tab */}
         {activeTab === 'stock' && config["Stock Settings"] && (
-          <div className="max-w-2xl">
-            <StockSettingsEditor
-              settings={config["Stock Settings"]}
-              onChange={(settings) => updateConfig({ "Stock Settings": settings })}
-              title="Global Stock Configuration"
-            />
+          <div className="space-y-6 max-w-2xl">
+            <h2 className="text-xl font-semibold mb-4">Global Stock Settings</h2>
+            
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={config["Stock Settings"]["Enable Stock Limit"]}
+                onChange={(e) => updateStockSettings("Enable Stock Limit", e.target.checked)}
+                className="rounded"
+              />
+              <span>Enable Stock Limit</span>
+            </label>
+
+            {config["Stock Settings"]["Enable Stock Limit"] && (
+              <div className="space-y-4 bg-gray-800 rounded-lg p-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Maximum Stock</label>
+                    <input
+                      type="number"
+                      value={config["Stock Settings"]["Maximum Stock"]}
+                      onChange={(e) => updateStockSettings("Maximum Stock", parseInt(e.target.value) || 0)}
+                      className="w-full bg-gray-700 rounded px-3 py-2"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Current Stock</label>
+                    <input
+                      type="number"
+                      value={config["Stock Settings"]["Current Stock"]}
+                      onChange={(e) => updateStockSettings("Current Stock", parseInt(e.target.value) || 0)}
+                      className="w-full bg-gray-700 rounded px-3 py-2"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Restock Amount</label>
+                    <input
+                      type="number"
+                      value={config["Stock Settings"]["Restock Amount"]}
+                      onChange={(e) => updateStockSettings("Restock Amount", parseInt(e.target.value) || 0)}
+                      className="w-full bg-gray-700 rounded px-3 py-2"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Restock Interval (seconds)</label>
+                    <input
+                      type="number"
+                      value={config["Stock Settings"]["Restock Interval (seconds, 0 = disabled)"]}
+                      onChange={(e) => updateStockSettings("Restock Interval (seconds, 0 = disabled)", parseInt(e.target.value) || 0)}
+                      className="w-full bg-gray-700 rounded px-3 py-2"
+                    />
+                  </div>
+                </div>
+                
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={config["Stock Settings"]["Reset Stock on Wipe"]}
+                    onChange={(e) => updateStockSettings("Reset Stock on Wipe", e.target.checked)}
+                    className="rounded"
+                  />
+                  <span>Reset Stock on Wipe</span>
+                </label>
+              </div>
+            )}
           </div>
         )}
 
