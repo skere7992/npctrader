@@ -43,7 +43,7 @@ const IconDisplay: React.FC<{
         <div className={`${size} bg-brand-charcoal border border-brand-green/30 rounded animate-pulse`} />
       )}
       <img
-        src={`./icons/${iconName}.png`} // Usar ruta relativa a los PNGs
+        src={`/icons/${iconName}.png`} // Usar ruta absoluta a los PNGs en public
         alt={iconName}
         className={`${size} rounded object-cover ${isLoading ? 'absolute opacity-0' : 'opacity-100'} transition-opacity duration-200`}
         onLoad={handleImageLoad}
