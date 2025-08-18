@@ -350,6 +350,192 @@ export const TradeOfferEditor: React.FC<TradeOfferEditorProps> = ({ offer, onCha
               )}
             </div>
           </div>
+
+          {/* Stock Settings */}
+          <div className="mt-6">
+            <h4 className="text-sm font-semibold text-brand-cream mb-3 flex items-center">
+              <Package className="w-4 h-4 mr-2" />
+              Stock Settings
+            </h4>
+            <div className="bg-brand-charcoal/30 p-4 rounded border border-brand-green/20">
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={offer["Stock Settings"]["Enable Stock Limit"]}
+                    onChange={(e) => updateOffer({
+                      "Stock Settings": {
+                        ...offer["Stock Settings"],
+                        "Enable Stock Limit": e.target.checked
+                      }
+                    })}
+                    className="w-4 h-4 text-brand-green bg-brand-charcoal border-brand-green rounded focus:ring-brand-green"
+                  />
+                  <label className="text-sm text-brand-cream">Enable Stock Limit</label>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs text-brand-grey mb-1">Maximum Stock</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={offer["Stock Settings"]["Maximum Stock"]}
+                      onChange={(e) => updateOffer({
+                        "Stock Settings": {
+                          ...offer["Stock Settings"],
+                          "Maximum Stock": parseInt(e.target.value) || 0
+                        }
+                      })}
+                      className="w-full px-2 py-1 bg-brand-charcoal border border-brand-green rounded text-brand-cream text-sm focus:outline-none focus:ring-1 focus:ring-brand-green"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-xs text-brand-grey mb-1">Current Stock</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={offer["Stock Settings"]["Current Stock"]}
+                      onChange={(e) => updateOffer({
+                        "Stock Settings": {
+                          ...offer["Stock Settings"],
+                          "Current Stock": parseInt(e.target.value) || 0
+                        }
+                      })}
+                      className="w-full px-2 py-1 bg-brand-charcoal border border-brand-green rounded text-brand-cream text-sm focus:outline-none focus:ring-1 focus:ring-brand-green"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-xs text-brand-grey mb-1">Restock Amount</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={offer["Stock Settings"]["Restock Amount"]}
+                      onChange={(e) => updateOffer({
+                        "Stock Settings": {
+                          ...offer["Stock Settings"],
+                          "Restock Amount": parseInt(e.target.value) || 0
+                        }
+                      })}
+                      className="w-full px-2 py-1 bg-brand-charcoal border border-brand-green rounded text-brand-cream text-sm focus:outline-none focus:ring-1 focus:ring-brand-green"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-xs text-brand-grey mb-1">Restock Interval (seconds)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={offer["Stock Settings"]["Restock Interval (seconds, 0 = disabled)"]}
+                      onChange={(e) => updateOffer({
+                        "Stock Settings": {
+                          ...offer["Stock Settings"],
+                          "Restock Interval (seconds, 0 = disabled)": parseInt(e.target.value) || 0
+                        }
+                      })}
+                      className="w-full px-2 py-1 bg-brand-charcoal border border-brand-green rounded text-brand-cream text-sm focus:outline-none focus:ring-1 focus:ring-brand-green"
+                      placeholder="0 = disabled"
+                    />
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={offer["Stock Settings"]["Reset Stock on Wipe"]}
+                      onChange={(e) => updateOffer({
+                        "Stock Settings": {
+                          ...offer["Stock Settings"],
+                          "Reset Stock on Wipe": e.target.checked
+                        }
+                      })}
+                      className="w-4 h-4 text-brand-green bg-brand-charcoal border-brand-green rounded focus:ring-brand-green"
+                    />
+                    <label className="text-xs text-brand-cream">Reset on Wipe</label>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-xs text-brand-grey mb-1">Last Restock Time</label>
+                    <input
+                      type="text"
+                      value={offer["Stock Settings"]["Last Restock Time"]}
+                      onChange={(e) => updateOffer({
+                        "Stock Settings": {
+                          ...offer["Stock Settings"],
+                          "Last Restock Time": e.target.value
+                        }
+                      })}
+                      className="w-full px-2 py-1 bg-brand-charcoal border border-brand-green rounded text-brand-cream text-sm focus:outline-none focus:ring-1 focus:ring-brand-green"
+                      placeholder="0001-01-01T00:00:00"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Cooldown Settings */}
+          <div className="mt-6">
+            <h4 className="text-sm font-semibold text-brand-cream mb-3 flex items-center">
+              <ChevronDown className="w-4 h-4 mr-2" />
+              Cooldown Settings
+            </h4>
+            <div className="bg-brand-charcoal/30 p-4 rounded border border-brand-green/20">
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={offer["Cooldown Settings"]["Enable Custom Cooldown"]}
+                    onChange={(e) => updateOffer({
+                      "Cooldown Settings": {
+                        ...offer["Cooldown Settings"],
+                        "Enable Custom Cooldown": e.target.checked
+                      }
+                    })}
+                    className="w-4 h-4 text-brand-green bg-brand-charcoal border-brand-green rounded focus:ring-brand-green"
+                  />
+                  <label className="text-sm text-brand-cream">Enable Custom Cooldown</label>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs text-brand-grey mb-1">Cooldown (seconds)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={offer["Cooldown Settings"]["Cooldown (seconds)"]}
+                      onChange={(e) => updateOffer({
+                        "Cooldown Settings": {
+                          ...offer["Cooldown Settings"],
+                          "Cooldown (seconds)": parseInt(e.target.value) || 0
+                        }
+                      })}
+                      className="w-full px-2 py-1 bg-brand-charcoal border border-brand-green rounded text-brand-cream text-sm focus:outline-none focus:ring-1 focus:ring-brand-green"
+                      disabled={!offer["Cooldown Settings"]["Enable Custom Cooldown"]}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-xs text-brand-grey mb-1">VIP Cooldown (seconds)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={offer["Cooldown Settings"]["VIP Cooldown (seconds)"]}
+                      onChange={(e) => updateOffer({
+                        "Cooldown Settings": {
+                          ...offer["Cooldown Settings"],
+                          "VIP Cooldown (seconds)": parseInt(e.target.value) || 0
+                        }
+                      })}
+                      className="w-full px-2 py-1 bg-brand-charcoal border border-brand-green rounded text-brand-cream text-sm focus:outline-none focus:ring-1 focus:ring-brand-green"
+                      disabled={!offer["Cooldown Settings"]["Enable Custom Cooldown"]}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
