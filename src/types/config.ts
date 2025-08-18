@@ -1045,6 +1045,36 @@ export const getIconCacheStats = () => {
   return iconManager.getCacheStats();
 };
 
+export type NPCTraderLanguageFile = Record<string, string>;
+
+export const DEFAULT_LANGUAGE_CONTENT: NPCTraderLanguageFile = {
+  "Greeting": "Greetings, {0}! I'm {1}, your local trader.",
+  "GreetingWithStatus": "Greetings, {0}{1}! I'm {2}, your local trader.",
+  "VipStatus": " (VIP Member)",
+  "OffersAvailable": "I have {0} trade offers available!",
+  "OnCooldownGreeting": "I'm sorry, but you must wait {0} before trading again.",
+  "ShowTradesConfirmation": "Excellent! Let me show you what I have available...",
+  "AboutServices": "I offer various trade packages for survivors like yourself. Bring me the required materials, and I'll give you valuable items in return.\nEach trade has a cooldown period to keep things fair for everyone.",
+  "CooldownInfo": "You can trade again in {0}.\nYou have a {1} cooldown period.",
+  "StandardCooldown": "Standard",
+  "VipCooldown": "VIP",
+  "OpeningInterface": "Opening my trading interface for you...",
+  "Goodbye": "Safe travels, friend! Come back anytime you need to trade.",
+  "Response_ShowTrades": "Show me your trades",
+  "Response_AboutServices": "Tell me about your services",
+  "Response_MaybeLater": "Maybe later",
+  "Response_Understand": "I understand, goodbye",
+  "Response_OpenInterface": "Open Trading Interface",
+  "Response_ServicesFirst": "Actually, tell me about your services first",
+  "Response_NeverMind": "Never mind",
+  "Response_WhenCanTrade": "When can I trade again?",
+  "Response_ThanksInfo": "Thanks for the info",
+  "Response_SoundsGood": "Sounds good, thanks",
+  "Response_ComeBackLater": "I'll come back later",
+  "Response_ThankYou": "Thank you",
+  "Response_Goodbye": "Goodbye"
+};
+
 // Helper function to get item display name (sin cambios)
 export const getItemDisplayName = (itemShortname: string): string => {
   return ITEM_DISPLAY_NAMES[itemShortname] || itemShortname
