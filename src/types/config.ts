@@ -31,6 +31,22 @@ export interface NCPIntegration {
   "Notification Types": NotificationTypes;
 }
 
+export interface StockSettings {
+  "Enable Stock Limit": boolean;
+  "Maximum Stock": number;
+  "Current Stock": number;
+  "Restock Amount": number;
+  "Restock Interval (seconds, 0 = disabled)": number;
+  "Reset Stock on Wipe": boolean;
+  "Last Restock Time": string;
+}
+
+export interface CooldownSettings {
+  "Enable Custom Cooldown": boolean;
+  "Cooldown (seconds)": number;
+  "VIP Cooldown (seconds)": number;
+}
+
 export interface UISettings {
   [key: string]: string;
 }
@@ -54,6 +70,8 @@ export interface TradeOffer {
   "Rewards": Reward[];
   "Icon": string;
   "Permission Required": string;
+  "Stock Settings": StockSettings;
+  "Cooldown Settings": CooldownSettings;
 }
 
 export interface NPCTraderConfig {
@@ -61,8 +79,8 @@ export interface NPCTraderConfig {
   "NPC Appearance": NPCAppearance;
   "Default Cooldown (seconds)": number;
   "VIP Cooldown (seconds)": number;
-  "Language Settings": LanguageSettings;
   "NCP Integration": NCPIntegration;
+  "Stock Settings": StockSettings;
   "UI Settings": UISettings;
   "Trade Offers": TradeOffer[];
 }

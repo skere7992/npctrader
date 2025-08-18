@@ -49,10 +49,6 @@ function App() {
           },
           "Default Cooldown (seconds)": 300,
           "VIP Cooldown (seconds)": 150,
-          "Language Settings": {
-            "Default Language": "en",
-            "Allow Per-Player Language": true
-          },
           "NCP Integration": {
             "Enable NCP Integration": true,
             "Use Chat Fallback if NCP Unavailable": true,
@@ -66,6 +62,15 @@ function App() {
               "Conversation Notifications": true,
               "General Info Notifications": true
             }
+          },
+          "Stock Settings": {
+            "Enable Stock Limit": false,
+            "Maximum Stock": 100,
+            "Current Stock": 100,
+            "Restock Amount": 100,
+            "Restock Interval (seconds, 0 = disabled)": 3600,
+            "Reset Stock on Wipe": true,
+            "Last Restock Time": "0001-01-01T00:00:00"
           },
           "UI Settings": {
             "Main Panel Color": "#2A2D2D",
@@ -98,7 +103,21 @@ function App() {
                 }
               ],
               "Icon": "wood",
-              "Permission Required": ""
+              "Permission Required": "",
+              "Stock Settings": {
+                "Enable Stock Limit": false,
+                "Maximum Stock": 100,
+                "Current Stock": 100,
+                "Restock Amount": 100,
+                "Restock Interval (seconds, 0 = disabled)": 3600,
+                "Reset Stock on Wipe": true,
+                "Last Restock Time": "0001-01-01T00:00:00"
+              },
+              "Cooldown Settings": {
+                "Enable Custom Cooldown": false,
+                "Cooldown (seconds)": 3600,
+                "VIP Cooldown (seconds)": 1800
+              }
             }
           ]
         } as NPCTraderConfig);
@@ -170,7 +189,21 @@ function App() {
         "Skin ID": 0
       }],
       "Icon": "ore",
-      "Permission Required": ""
+      "Permission Required": "",
+      "Stock Settings": {
+        "Enable Stock Limit": false,
+        "Maximum Stock": 100,
+        "Current Stock": 100,
+        "Restock Amount": 100,
+        "Restock Interval (seconds, 0 = disabled)": 3600,
+        "Reset Stock on Wipe": true,
+        "Last Restock Time": "0001-01-01T00:00:00"
+      },
+      "Cooldown Settings": {
+        "Enable Custom Cooldown": false,
+        "Cooldown (seconds)": 3600,
+        "VIP Cooldown (seconds)": 1800
+      }
     };
 
     updateConfig({
@@ -193,7 +226,6 @@ function App() {
     { id: 'general', label: 'General', icon: Settings },
     { id: 'appearance', label: 'Appearance', icon: User },
     { id: 'cooldowns', label: 'Cooldowns', icon: Clock },
-    { id: 'language', label: 'Language', icon: Globe },
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'ui', label: 'UI Colors', icon: Palette },
     { id: 'trades', label: 'Trade Offers', icon: ShoppingCart },
@@ -369,49 +401,120 @@ function App() {
                       />
                     </div>
                   </div>
-                </div>
-              )}
 
-              {activeTab === 'language' && (
-                <div className="space-y-6">
-                  <h2 className="text-2xl font-bold text-brand-cream flex items-center">
-                    <Globe className="w-6 h-6 mr-3" />
-                    Language Settings
-                  </h2>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-brand-cream mb-2">Default Language</label>
-                      <input
-                        type="text"
-                        value={config["Language Settings"]["Default Language"]}
-                        onChange={(e) => updateConfig({
-                          "Language Settings": {
-                            ...config["Language Settings"],
-                            "Default Language": e.target.value
-                          }
-                        })}
-                        className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
-                      />
-                    </div>
-                    
-                    <div className="flex items-center space-x-3">
-                      <input
-                        type="checkbox"
-                        checked={config["Language Settings"]["Allow Per-Player Language"]}
-                        onChange={(e) => updateConfig({
-                          "Language Settings": {
-                            ...config["Language Settings"],
-                            "Allow Per-Player Language": e.target.checked
-                          }
-                        })}
-                        className="w-4 h-4 text-brand-green bg-brand-charcoal border-brand-green rounded focus:ring-brand-green"
-                      />
-                      <label className="text-sm font-medium text-brand-cream">Allow Per-Player Language</label>
+                  {/* Global Stock Settings */}
+                  <div className="mt-8">
+                    <h3 className="text-xl font-bold text-brand-cream mb-4">Global Stock Settings</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <input
+                          type="checkbox"
+                          checked={config["Stock Settings"]["Enable Stock Limit"]}
+                          onChange={(e) => updateConfig({
+                            "Stock Settings": {
+                              ...config["Stock Settings"],
+                              "Enable Stock Limit": e.target.checked
+                            }
+                          })}
+                          className="w-4 h-4 text-brand-green bg-brand-charcoal border-brand-green rounded focus:ring-brand-green"
+                        />
+                        <label className="text-sm font-medium text-brand-cream">Enable Global Stock Limit</label>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-brand-cream mb-2">Maximum Stock</label>
+                          <input
+                            type="number"
+                            value={config["Stock Settings"]["Maximum Stock"]}
+                            onChange={(e) => updateConfig({
+                              "Stock Settings": {
+                                ...config["Stock Settings"],
+                                "Maximum Stock": parseInt(e.target.value) || 0
+                              }
+                            })}
+                            className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-brand-cream mb-2">Current Stock</label>
+                          <input
+                            type="number"
+                            value={config["Stock Settings"]["Current Stock"]}
+                            onChange={(e) => updateConfig({
+                              "Stock Settings": {
+                                ...config["Stock Settings"],
+                                "Current Stock": parseInt(e.target.value) || 0
+                              }
+                            })}
+                            className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-brand-cream mb-2">Restock Amount</label>
+                          <input
+                            type="number"
+                            value={config["Stock Settings"]["Restock Amount"]}
+                            onChange={(e) => updateConfig({
+                              "Stock Settings": {
+                                ...config["Stock Settings"],
+                                "Restock Amount": parseInt(e.target.value) || 0
+                              }
+                            })}
+                            className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-brand-cream mb-2">Restock Interval (seconds, 0 = disabled)</label>
+                          <input
+                            type="number"
+                            value={config["Stock Settings"]["Restock Interval (seconds, 0 = disabled)"]}
+                            onChange={(e) => updateConfig({
+                              "Stock Settings": {
+                                ...config["Stock Settings"],
+                                "Restock Interval (seconds, 0 = disabled)": parseInt(e.target.value) || 0
+                              }
+                            })}
+                            className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
+                          />
+                        </div>
+                        
+                        <div className="flex items-center space-x-3">
+                          <input
+                            type="checkbox"
+                            checked={config["Stock Settings"]["Reset Stock on Wipe"]}
+                            onChange={(e) => updateConfig({
+                              "Stock Settings": {
+                                ...config["Stock Settings"],
+                                "Reset Stock on Wipe": e.target.checked
+                              }
+                            })}
+                            className="w-4 h-4 text-brand-green bg-brand-charcoal border-brand-green rounded focus:ring-brand-green"
+                          />
+                          <label className="text-sm font-medium text-brand-cream">Reset Stock on Wipe</label>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-brand-cream mb-2">Last Restock Time</label>
+                          <input
+                            type="text"
+                            value={config["Stock Settings"]["Last Restock Time"]}
+                            onChange={(e) => updateConfig({
+                              "Stock Settings": {
+                                ...config["Stock Settings"],
+                                "Last Restock Time": e.target.value
+                              }
+                            })}
+                            className="w-full px-3 py-2 bg-brand-charcoal border border-brand-green rounded text-brand-cream"
+                            placeholder="0001-01-01T00:00:00"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  {/* Language File Creator */}
-                  <LanguageCreator className="mt-8" />
                 </div>
               )}
 
