@@ -8,6 +8,12 @@ export interface LanguageSettings {
   "Allow Per-Player Language": boolean;
 }
 
+export interface SupportedLanguage {
+  code: string;
+  name: string;
+  deeplCode: string;
+}
+
 export interface NotificationTypes {
   "Trade Success Notifications": boolean;
   "Trade Error Notifications": boolean;
@@ -127,6 +133,25 @@ export const SKIN_SETS = [
   'DesertOutlaw', 'DragonLord', 'RustmasTrader', 'CowboyTrader',
   'NightStalker', 'SteampunkMerchant', 'VikingWarrior', 'AzulMerchant',
   'ToxicMerchant', 'TribalHunter'
+];
+
+export const SUPPORTED_LANGUAGES: SupportedLanguage[] = [
+  { code: 'en', name: 'English', deeplCode: 'EN-US' },
+  { code: 'es', name: 'Spanish', deeplCode: 'ES' },
+  { code: 'fr', name: 'French', deeplCode: 'FR' },
+  { code: 'de', name: 'German', deeplCode: 'DE' },
+  { code: 'it', name: 'Italian', deeplCode: 'IT' },
+  { code: 'pt', name: 'Portuguese', deeplCode: 'PT-PT' },
+  { code: 'ru', name: 'Russian', deeplCode: 'RU' },
+  { code: 'ja', name: 'Japanese', deeplCode: 'JA' },
+  { code: 'ko', name: 'Korean', deeplCode: 'KO' },
+  { code: 'zh', name: 'Chinese (Simplified)', deeplCode: 'ZH' },
+  { code: 'nl', name: 'Dutch', deeplCode: 'NL' },
+  { code: 'pl', name: 'Polish', deeplCode: 'PL' },
+  { code: 'sv', name: 'Swedish', deeplCode: 'SV' },
+  { code: 'da', name: 'Danish', deeplCode: 'DA' },
+  { code: 'fi', name: 'Finnish', deeplCode: 'FI' },
+  { code: 'tr', name: 'Turkish', deeplCode: 'TR' }
 ];
 
 // Complete Rust Items List
